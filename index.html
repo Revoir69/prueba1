@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Music Store</title>
+  <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+
+  
+      <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+      <script src="lib/annyang.min.js"></script>
+    <script src="lib/spotify-web-api.js"></script>
+    <script src="build.js"></script>
+    <script src="audioanalyser-volume.bind.js"></script>
+    <script src="audioanalyser-volume-scale.js"></script>
+    <script src="remove-on-event.js"></script>
+    <script src="audioanalyser-waveform.js"></script>
+    <script src="spotify.js"></script>
+      
+</head>
+ 
+<body>
+  <a-scene antialias="true">
+      <a-sky src="#sky"></a-sky>
+      <a-sky src="Assets/sky1_1.jpg"></a-sky>
+      <a-camera position="0 0 0">
+            <a-cursor color="white"></a-cursor>
+        </a-camera>
+     
+    
+    <a-assets>
+      
+       <a-asset-item id="cd" src="Assets/cd/model.dae"></a-asset-item>
+        <a-asset-item id="cd_2" src="Assets/cd/model2.dae"></a-asset-item>
+        <img id="cd1" src="Assets/cd1.jpg">
+        <img id="cd2" src="Assets/daft.jpg">
+        <img id="play" src="Assets/boton.png">
+        <a-mixin id="bar"
+          geometry="primitive: box"
+          material="color: rgb(10, 20, 50); shader: flat"
+          scale-y-color="from: 10 20 50; to: 210, 220, 250; maxScale: 15"
+        ></a-mixin> 
+    </a-assets>
+      
+      <a-entity id="analyser"
+        audioanalyser
+        spotify
+      ></a-entity>
+
+      <a-entity id="text"
+        text="value: Di fuerte y claro 'play <nombre de artista o cancion> :); color: #FFF; width: 3"
+        position="0.3 0.825 -3"
+        remove-on-event="el: #analyser; event: spotify-play">
+      </a-entity>
+      
+      
+      <a-entity id="analyser1"
+        audioanalyser="src: #analyser"
+        audioanalyser-waveform="radius: 0.5"
+        rotation="90 0 0"
+        position="0 50 0"
+      ></a-entity>
+      
+      
+       
+      
+      <a-collada-model data-brackets-id="1717" src="#cd" material="" collada-model="#cd" position="2.16 2.16 -3.15" rotation="89.95 -180 0" scale="10 10 10"></a-collada-model>
+      
+      
+      
+       <a-box data-brackets-id="232" id="piso" color="#2a4361" audioanalyser-volume-scale="analyserEl: #analyser; multiplier: .008" position="0 0 0" side="double" shader="flat" material="color:#FFF;side:double;shader:flat;flatShading:false;opacity:0.54;height:258.36;metalness:0.04;roughness:1" geometry="primitive:ring;segmentsHeight:10;segmentsWidth:10;segmentsDepth:1;depth:1;radius:1.44;p:6.98;radiusTubular:0.38;segmentsRadial:9;segmentsTubular:101;radiusInner:1.02;radiusOuter:1.4400000000000002;segmentsPhi:13;segmentsTheta:33;thetaLength:335.96;thetaStart:0" rotation="89.95437383553924 0 0" scale="0.88583984375 0.88583984375 0.88583984375" visible="true"></a-box>
+     <a-box data-brackets-id="233" id="piso-2" color="#4ab5c8" audioanalyser-volume-scale="analyserEl: #analyser; multiplier: .008" position="0 0 0" side="double" shader="flat" material="color:#4ab5c8;side:double;shader:flat;flatShading:false;opacity:0.54;height:258.36;metalness:0.04;roughness:1" geometry="primitive:ring;segmentsHeight:10;segmentsWidth:10;segmentsDepth:1;depth:1;radius:1.44;p:6.98;radiusTubular:0.38;segmentsRadial:9;segmentsTubular:101;radiusInner:2.619999999999999;radiusOuter:3.219999999999999;segmentsPhi:13;segmentsTheta:33;thetaLength:335.96;thetaStart:0" rotation="89.95437383553924 -99.12169855763241 0" scale="0.88583984375 0.88583984375 0.88583984375" visible="true"></a-box>
+      <a-box data-brackets-id="234" id="piso-3" color="#FFF" audioanalyser-volume-scale="analyserEl: #analyser; multiplier: .008" position="0 0.04 0" side="double" shader="flat" material="color:#FFF;side:double;shader:flat;flatShading:false;opacity:0.66;height:258.36;metalness:0.04;roughness:1;transparent:false;visible:true;fog:true" geometry="primitive:ring;segmentsHeight:10;segmentsWidth:10;segmentsDepth:1;depth:1;radius:1.44;p:6.98;radiusTubular:0.38;segmentsRadial:9;segmentsTubular:101;radiusInner:6.5600000000000005;radiusOuter:5.9;segmentsPhi:13;segmentsTheta:33;thetaLength:284.46;thetaStart:0" rotation="89.95 78.5 0" scale="0.88583984375 0.88583984375 0.88583984375" visible="true"></a-box>
+  <a-entity data-brackets-id="1582" position="0.97 2.67 -3.01" geometry="primitive:plane;height:1.28;width:1.28" material="src:#cd1" event-set__1clickesp="_event: click; _target: #info; visible:true" event-set__2clickesp="_event: click; _target: #info1; visible:true" event-set__3clickesp="_event: click; _target: #boton; visible:true">
+      <a-animation begin="click"
+                   fill="backwards"
+                   direction="alternate"
+                 attribute="position"
+                 dur="2000"
+                 from="0.97 2.67 -3.01"
+                 to="0.27 2.73 -3.01"
+                 repeat="1"></a-animation>
+      </a-entity>
+      
+    <a-entity data-brackets-id="6471" position="-2.488 2.573 0.111" rotation="0 90 0" geometry="primitive:plane" material="src:#cd2" scale="1.286 1.363 1.393">
+      <a-animation begin="click"
+                   fill="backwards"
+                   direction="alternate"
+                 attribute="position"
+                 dur="2000"
+                 from="-2.488 2.573 0.111"
+                 to="-2.488 2.573 0.934"
+                 repeat="1"></a-animation>
+      </a-entity>
+      
+      <a-collada-model data-brackets-id="6472" src="#cd_2" collada-model="Assets/cd/model2.dae" position="-2.764 2.057 -1.034" rotation="89.95 -90 0" scale="10 10 10"></a-collada-model>
+      
+      
+      <a-entity position="-0.969 1.512 -2.646" text="color:white;letterSpacing:5;lineHeight:50;opacity:2.000;value:Vespertine es el cuarto album de estudio de la musico islandesa Bjork, lanzado el 27 de agosto de 2001, a traves de One Little Indian Records.;width:2" visible="false" id="info"></a-entity>
+      <a-entity position="-0.468 2.699 -2.646" text="color:white;letterSpacing:5;lineHeight:50;opacity:2.000;value:Harm of will;width:2" visible="false" id="info1"></a-entity>
+      <a-entity position="-0.640 2.705 -2.652" scale="0.075 0.075 0.189" id="boton" geometry="primitive:circle" material="src:#play" visible="false" sound="src: url(Assets/harm.mp3); on: click" event-set__1clickesp="_event: click; _target: #song; autoplay:false"></a-entity>
+      
+      
+
+      
+
+  </a-scene>
+</body>
+</html>
